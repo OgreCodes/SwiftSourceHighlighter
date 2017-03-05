@@ -10,6 +10,13 @@
 		1BFC1DF31E66B2E200B68E21 /* SwiftSourceHighlighter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFC1DE91E66B2E200B68E21 /* SwiftSourceHighlighter.framework */; };
 		1BFC1DF81E66B2E200B68E21 /* SwiftSourceHighlighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFC1DF71E66B2E200B68E21 /* SwiftSourceHighlighterTests.swift */; };
 		1BFC1DFA1E66B2E200B68E21 /* SwiftSourceHighlighter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFC1DEC1E66B2E200B68E21 /* SwiftSourceHighlighter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1BFC1E041E66B2F500B68E21 /* SourceHighlighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFC1E031E66B2F500B68E21 /* SourceHighlighterTests.swift */; };
+		1BFC1E061E66B30E00B68E21 /* SourceHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFC1E051E66B30E00B68E21 /* SourceHighlighter.swift */; };
+		1BFC1E071E66B30E00B68E21 /* SourceHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFC1E051E66B30E00B68E21 /* SourceHighlighter.swift */; };
+		1BFC1E0B1E66B3A900B68E21 /* agate.css in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E091E66B3A900B68E21 /* agate.css */; };
+		1BFC1E0C1E66B3A900B68E21 /* agate.css in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E091E66B3A900B68E21 /* agate.css */; };
+		1BFC1E101E6BCBAE00B68E21 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */; };
+		1BFC1E111E6BCBAE00B68E21 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +36,10 @@
 		1BFC1DF21E66B2E200B68E21 /* SwiftSourceHighlighterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftSourceHighlighterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BFC1DF71E66B2E200B68E21 /* SwiftSourceHighlighterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSourceHighlighterTests.swift; sourceTree = "<group>"; };
 		1BFC1DF91E66B2E200B68E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BFC1E031E66B2F500B68E21 /* SourceHighlighterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceHighlighterTests.swift; sourceTree = "<group>"; };
+		1BFC1E051E66B30E00B68E21 /* SourceHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceHighlighter.swift; sourceTree = "<group>"; };
+		1BFC1E091E66B3A900B68E21 /* agate.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = agate.css; sourceTree = "<group>"; };
+		1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +64,7 @@
 		1BFC1DDF1E66B2E200B68E21 = {
 			isa = PBXGroup;
 			children = (
+				1BFC1E081E66B39000B68E21 /* WebAssets */,
 				1BFC1DEB1E66B2E200B68E21 /* SwiftSourceHighlighter */,
 				1BFC1DF61E66B2E200B68E21 /* SwiftSourceHighlighterTests */,
 				1BFC1DEA1E66B2E200B68E21 /* Products */,
@@ -71,6 +83,7 @@
 		1BFC1DEB1E66B2E200B68E21 /* SwiftSourceHighlighter */ = {
 			isa = PBXGroup;
 			children = (
+				1BFC1E051E66B30E00B68E21 /* SourceHighlighter.swift */,
 				1BFC1DEC1E66B2E200B68E21 /* SwiftSourceHighlighter.h */,
 				1BFC1DED1E66B2E200B68E21 /* Info.plist */,
 			);
@@ -80,10 +93,20 @@
 		1BFC1DF61E66B2E200B68E21 /* SwiftSourceHighlighterTests */ = {
 			isa = PBXGroup;
 			children = (
+				1BFC1E031E66B2F500B68E21 /* SourceHighlighterTests.swift */,
 				1BFC1DF71E66B2E200B68E21 /* SwiftSourceHighlighterTests.swift */,
 				1BFC1DF91E66B2E200B68E21 /* Info.plist */,
 			);
 			path = SwiftSourceHighlighterTests;
+			sourceTree = "<group>";
+		};
+		1BFC1E081E66B39000B68E21 /* WebAssets */ = {
+			isa = PBXGroup;
+			children = (
+				1BFC1E091E66B3A900B68E21 /* agate.css */,
+				1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */,
+			);
+			name = WebAssets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +172,7 @@
 					1BFC1DE81E66B2E200B68E21 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = EWFS923F38;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1BFC1DF11E66B2E200B68E21 = {
@@ -181,6 +205,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BFC1E0B1E66B3A900B68E21 /* agate.css in Resources */,
+				1BFC1E101E6BCBAE00B68E21 /* highlight.pack.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +214,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BFC1E0C1E66B3A900B68E21 /* agate.css in Resources */,
+				1BFC1E111E6BCBAE00B68E21 /* highlight.pack.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BFC1E061E66B30E00B68E21 /* SourceHighlighter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +234,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BFC1E041E66B2F500B68E21 /* SourceHighlighterTests.swift in Sources */,
+				1BFC1E071E66B30E00B68E21 /* SourceHighlighter.swift in Sources */,
 				1BFC1DF81E66B2E200B68E21 /* SwiftSourceHighlighterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +355,7 @@
 		1BFC1DFE1E66B2E200B68E21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EWFS923F38;
@@ -336,6 +368,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ogre-codes.SwiftSourceHighlighter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -343,6 +376,7 @@
 		1BFC1DFF1E66B2E200B68E21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EWFS923F38;
@@ -362,6 +396,7 @@
 		1BFC1E011E66B2E200B68E21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = EWFS923F38;
 				INFOPLIST_FILE = SwiftSourceHighlighterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -374,6 +409,7 @@
 		1BFC1E021E66B2E200B68E21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = EWFS923F38;
 				INFOPLIST_FILE = SwiftSourceHighlighterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
