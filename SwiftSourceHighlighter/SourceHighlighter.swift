@@ -17,25 +17,24 @@ import JavaScriptCore
 ///     
 /// By default this uses the copy of Highlight.js included in this framework,
 ///     with support for C, C++, Java, Objective-C, Swift, HTML, CSS, LESS,
-///     SCSS, 
+///     SCSS,
 /// Specify the highlightURL in the init to override this. For example:
 ////    let myHighlight = Bundle.main.bundleURL.appendingPathComponent("highlight.pack.js")
 ///     let sourceHighlighter = SourceHighlighter(html: html, highlightURL: )
 class SourceHighlighter {
     let sourceHTML: String
-    let highlightURL: URL
+    var highlightURL: URL!
     let context = JSContext()!
     let regexPattern: String
     
     init(html: String,
          jsDirectoryURL: URL? = nil,
-         regexPattern: String = "(?:<pre>.*<code>)(.*?)(?:<\\/code>.*<\\/pre>)") {
+         regexPattern: String = "(?:<pre>.*?<code>)(.+?)(?:<\\/code>.*?<\\/pre>)") {
         self.sourceHTML = html
         self.regexPattern = regexPattern
         // Default to using highlightjs from this bundle.
         self.highlightURL = jsDirectoryURL ??
-            Bundle(for: NSClassFromString("SourceHighlighter")!).bundleURL
-                .appendingPathComponent("highlight.pack.js")
+            Bundle(for: type(of: self)).bundleURL.appendingPathComponent("highlight.pack.js")
         context.exceptionHandler = self.jsErrorHandler
     }
 
