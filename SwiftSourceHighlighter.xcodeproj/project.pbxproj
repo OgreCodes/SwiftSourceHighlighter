@@ -15,8 +15,8 @@
 		1BFC1E071E66B30E00B68E21 /* SourceHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFC1E051E66B30E00B68E21 /* SourceHighlighter.swift */; };
 		1BFC1E0B1E66B3A900B68E21 /* agate.css in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E091E66B3A900B68E21 /* agate.css */; };
 		1BFC1E0C1E66B3A900B68E21 /* agate.css in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E091E66B3A900B68E21 /* agate.css */; };
-		1BFC1E101E6BCBAE00B68E21 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */; };
-		1BFC1E111E6BCBAE00B68E21 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */; };
+		1BFC1E131E6C062F00B68E21 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E121E6C062F00B68E21 /* highlight.pack.js */; };
+		1BFC1E141E6C062F00B68E21 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BFC1E121E6C062F00B68E21 /* highlight.pack.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 		1BFC1E031E66B2F500B68E21 /* SourceHighlighterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceHighlighterTests.swift; sourceTree = "<group>"; };
 		1BFC1E051E66B30E00B68E21 /* SourceHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceHighlighter.swift; sourceTree = "<group>"; };
 		1BFC1E091E66B3A900B68E21 /* agate.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = agate.css; sourceTree = "<group>"; };
-		1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
+		1BFC1E121E6C062F00B68E21 /* highlight.pack.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				1BFC1E091E66B3A900B68E21 /* agate.css */,
-				1BFC1E0F1E6BCBAE00B68E21 /* highlight.pack.js */,
+				1BFC1E121E6C062F00B68E21 /* highlight.pack.js */,
 			);
 			name = WebAssets;
 			sourceTree = "<group>";
@@ -206,7 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BFC1E0B1E66B3A900B68E21 /* agate.css in Resources */,
-				1BFC1E101E6BCBAE00B68E21 /* highlight.pack.js in Resources */,
+				1BFC1E131E6C062F00B68E21 /* highlight.pack.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BFC1E0C1E66B3A900B68E21 /* agate.css in Resources */,
-				1BFC1E111E6BCBAE00B68E21 /* highlight.pack.js in Resources */,
+				1BFC1E141E6C062F00B68E21 /* highlight.pack.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

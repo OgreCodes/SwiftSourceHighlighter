@@ -9,32 +9,56 @@
 import Foundation
 import JavaScriptCore
 
-/// Run highlighter.js against an HTML document with
+enum CSSOptions {
+    case url(String)
+    case inline
+    case omit
+}
 
-/// Basic Usage (Most basic use case):
-///     let sourceHighlighter = SourceHighlighter(html: html)
-///     let highlightedHTML = sourceHighlighter.getRenderedHTML()
-///     
+
+/// Takes a HTML containing source code sections and adds
+/// tags to highlight the source to make it easier to read.
+///
+/// Basic Usage:
+///
+///     let finalHTML = SourceHighlighter().highlight(sourceHTML)
+///
+/// By default it appends a link to a CSS file on a CDN to the source 
+/// but it can also inline the CSS or link to a CSS file of your choice
+/// using a chainable method as follows:
+///
+///     let highlighter = SourceHighlighter(options: .inlineCSS)
+///     let highlighted = highlighter.highlight(html)
+///
+
 /// By default this uses the copy of Highlight.js included in this framework,
-///     with support for C, C++, Java, Objective-C, Swift, HTML, CSS, LESS,
-///     SCSS,
+/// with support for swift objectivec markdwon php cs html css javascript
+/// handlebars bash coffeescript sql ruby apache nginx cpp xml python
+///
 /// Specify the highlightURL in the init to override this. For example:
-////    let myHighlight = Bundle.main.bundleURL.appendingPathComponent("highlight.pack.js")
-///     let sourceHighlighter = SourceHighlighter(html: html, highlightURL: )
+///
+///     let customHighlighter =
+///         Bundle.main.bundleURL.appendingPathComponent("highlight.pack.js")
+///     let sourceHighlighter = SourceHighlighter(highlightURL: customHighlighter)
+///
+
 class SourceHighlighter {
-    let sourceHTML: String
     var highlightURL: URL!
     let context = JSContext()!
     let regexPattern: String
+    let cssPlacement: CSSOptions
+    let theme = "agate.css"
     
-    init(html: String,
-         jsDirectoryURL: URL? = nil,
-         regexPattern: String = "(?:<pre>.*?<code>)(.+?)(?:<\\/code>.*?<\\/pre>)") {
-        self.sourceHTML = html
+    init(highlightURL: URL? = nil,
+         regexPattern: String = "(?:<pre>.*?<code>)(.+?)(?:<\\/code>.*?<\\/pre>)",
+         cssPlacement: CSSOptions = .inline) {
+
         self.regexPattern = regexPattern
+        self.cssPlacement = cssPlacement
         // Default to using highlightjs from this bundle.
-        self.highlightURL = jsDirectoryURL ??
-            Bundle(for: type(of: self)).bundleURL.appendingPathComponent("highlight.pack.js")
+        self.highlightURL = highlightURL ??
+            Bundle(for: SourceHighlighter.self).bundleURL
+                .appendingPathComponent("highlight.pack.js")
         context.exceptionHandler = self.jsErrorHandler
     }
 
@@ -44,8 +68,8 @@ class SourceHighlighter {
         NSLog("Javascript Error: \(error)")
     }
 
-    /// This function generates an array of 
-    func searchForCodeBlocks(inHTML: String) -> [NSTextCheckingResult] {
+    /// This function generates an array of
+    func fetchMatchingCodeBlocks(sourceHTML: String) -> [NSTextCheckingResult] {
         let regex = try! NSRegularExpression(
             pattern: regexPattern,
             options: [.dotMatchesLineSeparators, .caseInsensitive])
@@ -55,11 +79,13 @@ class SourceHighlighter {
         return matches
     }
     
-    func getJSHighlighter() -> JSValue? {
+    func getJSHighlighter() -> JSValue {
         // highlight.js, javascript source code highlighter
+        // Lets not be coy here, without the highlighter we're sunk.
         guard let highlightJS = try? String(contentsOf: highlightURL) else {
-            return nil
+            fatalError()
         }
+
         // The highlighter requires the Window object be defined
         // Inspiration https://blog.risingstack.com/running-node-modules-in-your-ios-project/
         _ = context.evaluateScript("var window = this;")
@@ -70,19 +96,37 @@ class SourceHighlighter {
         return context.objectForKeyedSubscript("jsHighlight")
     }
     
-    func getRenderedHTML() -> String? {
+    public func highlight(_ sourceHTML: String) -> String {
         var html = sourceHTML
-        guard let jsHighlighter = getJSHighlighter() else {
-            NSLog("Error: Can't find Highlighter")
-            return nil
-        }
-        
+        let jsHighlighter = getJSHighlighter()
+
         // Apply code highlighting in reverse order so early changes don't invalidate indexes.
-        for match in searchForCodeBlocks(inHTML: html).reversed() {
+
+        for match in fetchMatchingCodeBlocks(sourceHTML: html).reversed() {
             let matchedText: String = (html as NSString).substring(with: match.rangeAt(1))
             let newText = jsHighlighter.call(withArguments: [matchedText]).toString()
             html = (html as NSString).replacingCharacters(in: match.rangeAt(1), with: newText!) as String
         }
-        return html
+        return injectCSS(html)
+    }
+    
+    func injectCSS(_ html: String) -> String {
+        let injectedHTML:String
+        switch cssPlacement {
+        case .inline:
+            let cssFile = Bundle(for: SourceHighlighter.self).bundleURL
+                .appendingPathComponent(theme)
+            let cssText = try! String(contentsOf: cssFile)
+            let injectedCSS = "<style>\(cssText)</style>"
+            injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(injectedCSS)</html>")
+            NSLog("Inline")
+        case .url(let url):
+            let cssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url)\">"
+            injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(cssLink)</html>")
+            NSLog(url)
+        case .omit:
+            injectedHTML = html
+        }
+        return injectedHTML
     }
 }
