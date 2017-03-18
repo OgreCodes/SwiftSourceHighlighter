@@ -9,13 +9,6 @@
 import Foundation
 import JavaScriptCore
 
-public enum CSSOptions {
-    case url(String)
-    case inline
-    case omit
-}
-
-
 /// Takes a HTML containing source code sections and adds
 /// tags to highlight the source to make it easier to read.
 ///
@@ -31,30 +24,31 @@ public enum CSSOptions {
 ///     let highlighted = highlighter.highlight(html)
 ///
 
-/// By default this uses the copy of Highlight.js included in this framework,
-/// with support for: swift, objectivec, markdwon, php, c#, html, css, javascript,
-/// handlebars, bash, coffeescript, sql, ruby, apache, nginx, c++, xml, and python
-/// 
-/// Specify the highlightURL in the init to override this. For example:
+/// You can use your own copy of *highlight.js* by specifying the highlightURL
+/// For example:
 ///
 ///     let customHighlighter =
 ///         Bundle.main.bundleURL.appendingPathComponent("highlight.pack.js")
 ///     let sourceHighlighter = SourceHighlighter(highlightURL: customHighlighter)
 ///
 
+
 public class SourceHighlighter {
     var highlightURL: URL!
     let context = JSContext()!
     let regexPattern: String
-    let cssPlacement: CSSOptions
-    let theme = "agate.css"
+    let cssPlacement: HighlighterCSSOptions
+    let theme: HighlighterTheme
     
     public init(highlightURL: URL? = nil,
          regexPattern: String = "(?:<pre>.*?<code>)(.+?)(?:<\\/code>.*?<\\/pre>)",
-         cssPlacement: CSSOptions = .inline) {
+         cssPlacement: HighlighterCSSOptions = .inline,
+         theme: HighlighterTheme = .agate
+        ) {
 
         self.regexPattern = regexPattern
         self.cssPlacement = cssPlacement
+        self.theme = theme
         // Default to using highlightjs from this bundle.
         self.highlightURL = highlightURL ??
             Bundle(for: SourceHighlighter.self).bundleURL
@@ -69,7 +63,7 @@ public class SourceHighlighter {
         NSLog("Javascript Error: \(error)")
     }
 
-    /// This function generates an array of
+    /// This function generates an array of matching codeblocks
     func fetchMatchingCodeBlocks(sourceHTML: String) -> [NSTextCheckingResult] {
         let regex = try! NSRegularExpression(
             pattern: regexPattern,
@@ -80,6 +74,8 @@ public class SourceHighlighter {
         return matches
     }
     
+    // Set up the highlighter and creates the javascript context for running
+    // code highlighting.
     func getJSHighlighter() -> JSValue {
         // highlight.js, javascript source code highlighter
         // Lets not be coy here, without the highlighter we're sunk.
@@ -118,15 +114,17 @@ public class SourceHighlighter {
             let cssFile = Bundle(for: SourceHighlighter.self).bundleURL
                 .appendingPathComponent("highlight", isDirectory: true)
                 .appendingPathComponent("styles", isDirectory: true)
-                .appendingPathComponent(theme)
+                .appendingPathComponent(theme.rawValue)
             let cssText = try! String(contentsOf: cssFile)
             let injectedCSS = "<style>\(cssText)</style>"
             injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(injectedCSS)</html>")
-            NSLog("Inline")
         case .url(let url):
             let cssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url)\">"
             injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(cssLink)</html>")
-            NSLog(url)
+        case .autoURL:
+            let url = theme.rawValue
+            let cssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url)\">"
+            injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(cssLink)</html>")
         case .omit:
             injectedHTML = html
         }

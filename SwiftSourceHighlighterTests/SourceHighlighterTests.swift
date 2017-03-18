@@ -43,6 +43,32 @@ class SourceHighlighterTests: XCTestCase {
         XCTAssert(highlightedHTML.range(of: ".hljs-comment,") != nil)
     }
     
+    // check assigning a theme works by verifying a known string is injected
+    func testThemeAssignment() {
+        let xcodeHTML = SourceHighlighter(
+            cssPlacement: .inline,
+            theme: .xcode)
+                .highlight(html)
+        
+        XCTAssert(xcodeHTML.range(of: "XCode style") != nil)
+        
+        let arduinoHTML = SourceHighlighter(
+            cssPlacement: .inline,
+            theme: .arduino_light)
+            .highlight(html)
+        
+        XCTAssert(arduinoHTML.range(of: "Arduino® Light Theme") != nil)
+    }
+
+    func testAutoURL() {
+        let rainbowHTML = SourceHighlighter(
+            cssPlacement: .autoURL,
+            theme: .rainbow)
+            .highlight(html)
+        XCTAssert(rainbowHTML.range(of: "rainbow.css") != nil)
+    }
+    
+    
     func testLinkedCSS() {
         let highlightedHTML = SourceHighlighter(cssPlacement: .url("test.css")).highlight(html)
         
