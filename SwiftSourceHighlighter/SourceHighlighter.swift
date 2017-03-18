@@ -9,7 +9,7 @@
 import Foundation
 import JavaScriptCore
 
-enum CSSOptions {
+public enum CSSOptions {
     case url(String)
     case inline
     case omit
@@ -32,9 +32,9 @@ enum CSSOptions {
 ///
 
 /// By default this uses the copy of Highlight.js included in this framework,
-/// with support for swift objectivec markdwon php cs html css javascript
-/// handlebars bash coffeescript sql ruby apache nginx cpp xml python
-///
+/// with support for: swift, objectivec, markdwon, php, c#, html, css, javascript,
+/// handlebars, bash, coffeescript, sql, ruby, apache, nginx, c++, xml, and python
+/// 
 /// Specify the highlightURL in the init to override this. For example:
 ///
 ///     let customHighlighter =
@@ -42,14 +42,14 @@ enum CSSOptions {
 ///     let sourceHighlighter = SourceHighlighter(highlightURL: customHighlighter)
 ///
 
-class SourceHighlighter {
+public class SourceHighlighter {
     var highlightURL: URL!
     let context = JSContext()!
     let regexPattern: String
     let cssPlacement: CSSOptions
     let theme = "agate.css"
     
-    init(highlightURL: URL? = nil,
+    public init(highlightURL: URL? = nil,
          regexPattern: String = "(?:<pre>.*?<code>)(.+?)(?:<\\/code>.*?<\\/pre>)",
          cssPlacement: CSSOptions = .inline) {
 
@@ -58,6 +58,7 @@ class SourceHighlighter {
         // Default to using highlightjs from this bundle.
         self.highlightURL = highlightURL ??
             Bundle(for: SourceHighlighter.self).bundleURL
+                .appendingPathComponent("highlight", isDirectory: true)
                 .appendingPathComponent("highlight.pack.js")
         context.exceptionHandler = self.jsErrorHandler
     }
@@ -115,6 +116,8 @@ class SourceHighlighter {
         switch cssPlacement {
         case .inline:
             let cssFile = Bundle(for: SourceHighlighter.self).bundleURL
+                .appendingPathComponent("highlight", isDirectory: true)
+                .appendingPathComponent("styles", isDirectory: true)
                 .appendingPathComponent(theme)
             let cssText = try! String(contentsOf: cssFile)
             let injectedCSS = "<style>\(cssText)</style>"
