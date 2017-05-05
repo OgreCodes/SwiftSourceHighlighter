@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B22A09A1E6F3CD100291099 /* highlight in Resources */ = {isa = PBXBuildFile; fileRef = 1B22A0991E6F3CD100291099 /* highlight */; };
 		1B22A09B1E6F3CD100291099 /* highlight in Resources */ = {isa = PBXBuildFile; fileRef = 1B22A0991E6F3CD100291099 /* highlight */; };
+		1B75EA331EBD10E200572569 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 1B75EA321EBD10E200572569 /* README.md */; };
 		1B869CB91E7D09930077FE41 /* themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B869CB81E7D09930077FE41 /* themes.swift */; };
 		1B869CBA1E7D09930077FE41 /* themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B869CB81E7D09930077FE41 /* themes.swift */; };
 		1BFC1DF31E66B2E200B68E21 /* SwiftSourceHighlighter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFC1DE91E66B2E200B68E21 /* SwiftSourceHighlighter.framework */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		1B22A0991E6F3CD100291099 /* highlight */ = {isa = PBXFileReference; lastKnownFileType = folder; path = highlight; sourceTree = "<group>"; };
+		1B75EA321EBD10E200572569 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1B869CB81E7D09930077FE41 /* themes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = themes.swift; sourceTree = "<group>"; };
 		1BFC1DE91E66B2E200B68E21 /* SwiftSourceHighlighter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftSourceHighlighter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BFC1DEC1E66B2E200B68E21 /* SwiftSourceHighlighter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftSourceHighlighter.h; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		1BFC1DDF1E66B2E200B68E21 = {
 			isa = PBXGroup;
 			children = (
+				1B75EA321EBD10E200572569 /* README.md */,
 				1BFC1E081E66B39000B68E21 /* WebAssets */,
 				1BFC1DEB1E66B2E200B68E21 /* SwiftSourceHighlighter */,
 				1BFC1DF61E66B2E200B68E21 /* SwiftSourceHighlighterTests */,
@@ -223,6 +226,7 @@
 			files = (
 				1BFC1E061E66B30E00B68E21 /* SourceHighlighter.swift in Sources */,
 				1B869CB91E7D09930077FE41 /* themes.swift in Sources */,
+				1B75EA331EBD10E200572569 /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

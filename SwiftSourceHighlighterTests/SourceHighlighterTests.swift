@@ -61,6 +61,7 @@ class SourceHighlighterTests: XCTestCase {
     }
 
     func testAutoURL() {
+        // Auto URL uses a link to a CDN
         let rainbowHTML = SourceHighlighter(
             cssPlacement: .autoURL,
             theme: .rainbow)

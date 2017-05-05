@@ -16,21 +16,24 @@ import JavaScriptCore
 ///
 ///     let finalHTML = SourceHighlighter().highlight(sourceHTML)
 ///
-/// By default it appends a link to a CSS file on a CDN to the source 
-/// but it can also inline the CSS or link to a CSS file of your choice
+/// By default it appends the CSS inline at the end of the source HTML. 
+/// It can also inline the CSS or link to a CSS file of your choice
 /// using a chainable method as follows:
 ///
-///     let highlighter = SourceHighlighter(options: .inlineCSS)
-///     let highlighted = highlighter.highlight(html)
+///     let xcodeHTML = SourceHighlighter(
+///         cssPlacement: .url("test.css"),
+///         theme: .xcode)
+///         .highlight(html)
 ///
-
-/// You can use your own copy of *highlight.js* by specifying the highlightURL
+/// This framework includes a copy of `highlight.js, but you can include your own
+/// version by building a URL to a copy of the library from your bundle.
 /// For example:
 ///
 ///     let customHighlighter =
 ///         Bundle.main.bundleURL.appendingPathComponent("highlight.pack.js")
 ///     let sourceHighlighter = SourceHighlighter(highlightURL: customHighlighter)
 ///
+/// Take a look at the tests for more examples.
 
 
 public class SourceHighlighter {
@@ -111,6 +114,7 @@ public class SourceHighlighter {
         let injectedHTML:String
         switch cssPlacement {
         case .inline:
+            // Dump CSS immediately prior to the end of the html.
             let cssFile = Bundle(for: SourceHighlighter.self).bundleURL
                 .appendingPathComponent("highlight", isDirectory: true)
                 .appendingPathComponent("styles", isDirectory: true)
@@ -119,6 +123,7 @@ public class SourceHighlighter {
             let injectedCSS = "<style>\(cssText)</style>"
             injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(injectedCSS)</html>")
         case .url(let url):
+            // Add a link to the 
             let cssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url)\">"
             injectedHTML = html.replacingOccurrences(of: "</html>", with: "\(cssLink)</html>")
         case .autoURL:
